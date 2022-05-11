@@ -16,6 +16,7 @@ public class MovieDAO {
         valores.put("ano", filme.getAno() );
         valores.put("categoria", filme.getCategoria().toString());
         valores.put("analise", filme.getAnalise().toString());
+        valores.put("recomenda", filme.getRecomenda());
 
         DB banco = new DB(context);
         SQLiteDatabase db = banco.getWritableDatabase();
@@ -29,6 +30,7 @@ public class MovieDAO {
         valores.put("ano", filme.getAno() );
         valores.put("categoria", filme.getCategoria().toString());
         valores.put("analise", filme.getAnalise().toString());
+        valores.put("recomenda", filme.getRecomenda());
 
         DB banco = new DB(context);
         SQLiteDatabase db = banco.getWritableDatabase();
@@ -46,7 +48,7 @@ public class MovieDAO {
         List<Movie> lista = new ArrayList<>();
         DB banco = new DB(context);
         SQLiteDatabase db = banco.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT id, nome, ano, categoria, analise FROM movie ORDER BY nome", null );
+        Cursor cursor = db.rawQuery("SELECT id, nome, ano, categoria, analise, recomenda FROM movie ORDER BY nome", null );
         if( cursor.getCount() > 0 ){
             cursor.moveToFirst();
             do{
@@ -56,6 +58,8 @@ public class MovieDAO {
                 filme.setAno( cursor.getInt(2) );
                 filme.setCategoria(cursor.getString(3));
                 filme.setAnalise(cursor.getString(4));
+                filme.setRecomenda((cursor.getInt(5) == 1));
+
                 lista.add( filme );
             }while( cursor.moveToNext() );
         }
@@ -65,7 +69,7 @@ public class MovieDAO {
     public static Movie getFilmeById(Context context, int id){
         DB banco = new DB(context);
         SQLiteDatabase db = banco.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT id, nome, ano, categoria, analise FROM movie WHERE id = " + id, null );
+        Cursor cursor = db.rawQuery("SELECT id, nome, ano, categoria, analise, recomenda FROM movie WHERE id = " + id, null );
         if( cursor.getCount() > 0 ){
             cursor.moveToFirst();
             Movie filme = new Movie();
@@ -74,6 +78,7 @@ public class MovieDAO {
             filme.setAno( cursor.getInt(2) );
             filme.setCategoria(cursor.getString(3));
             filme.setAnalise(cursor.getString(4));
+            filme.setRecomenda((cursor.getInt(5) == 1));
             return filme;
         }else{
             return null;

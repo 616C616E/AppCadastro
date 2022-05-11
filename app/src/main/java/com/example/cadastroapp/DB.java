@@ -15,15 +15,17 @@ public class DB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS movie");
         db.execSQL("CREATE TABLE IF NOT EXISTS movie ( " +
                 "     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT ," +
                 "     nome TEXT NOT NULL ," +
                 "     categoria TEXT NOT NULL ," +
                 "     analise TEXT NOT NULL ," +
+                "     recomenda INTEGER NOT NULL ," +
                 "     ano INTEGER  ) "  );
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
     }
 }

@@ -4,10 +4,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ public class FormActivity extends AppCompatActivity {
     private Button btnExcluir;
     private String acao;
     private Movie movie;
+    private boolean recomenda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,13 @@ public class FormActivity extends AppCompatActivity {
                     break;
                 }
             }
+            if(movie.recomenda){
+                RadioButton rdRecomenda = findViewById(R.id.rdRecomendo);
+                rdRecomenda.setChecked(true);
+            } else {
+                RadioButton rdNRecomenda = findViewById(R.id.rdNRecomendo);
+                rdNRecomenda.setChecked(true);
+            }
         }
     }
 
@@ -94,6 +104,7 @@ public class FormActivity extends AppCompatActivity {
             movie.setAno( Integer.valueOf( spAno.getSelectedItem().toString()  ) );
             movie.setCategoria(spCategorias.getSelectedItem().toString());
             movie.analise = etAnalise.getText().toString();
+            movie.setRecomenda(recomenda);
 
             if( acao.equals("editar")){
                 MovieDAO.editar (movie, this);
@@ -106,6 +117,8 @@ public class FormActivity extends AppCompatActivity {
                 spCategorias.setSelection(0, true);
                 etAnalise.setText("");
             }
+            Intent intent = new Intent(FormActivity.this, MainActivity.class);
+            startActivity( intent );
         }
     }
 
@@ -128,10 +141,27 @@ public class FormActivity extends AppCompatActivity {
                     spAno.setSelection(0);
                     spCategorias.setSelection(0, true);
                     etAnalise.setText("");
+                    Intent intent = new Intent(FormActivity.this, MainActivity.class);
+                    startActivity( intent );
                 }
             });
             alerta.show();
         }
 
+    }
+
+    public void onRadioButtonClicked(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
+
+        switch(view.getId()) {
+            case R.id.rdRecomendo:
+                if (checked)
+                    recomenda = true;
+                    break;
+            case R.id.rdNRecomendo:
+                if (checked)
+                    recomenda = false;
+                    break;
+        }
     }
 }

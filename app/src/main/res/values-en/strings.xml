@@ -51,4 +51,13 @@
 
     <string name="txtAtencao">Warning</string>
     <string name="action_settings">Settings</string>
+    <string name="nameHint">Type the movies title</string>
+    <string name="category">Category: </string>
+    <string name="year">Year: </string>
+    <string name="review">Review: </string>
+    <string name="recomended">Recomended</string>
+    <string name="notrecomended">Not Recomended</string>
+    <string name="reviewHint">Type your review...</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
 </resources>

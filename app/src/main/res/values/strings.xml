@@ -50,4 +50,13 @@
 
     <string name="txtAtencao">Atenção</string>
     <string name="action_settings">Configurações</string>
+    <string name="nameHint">Digite o nome do filme</string>
+    <string name="category">Categoria: </string>
+    <string name="year">Ano: </string>
+    <string name="review">Analise: </string>
+    <string name="recomended">Recomendo</string>
+    <string name="notrecomended">Não Recomendo</string>
+    <string name="reviewHint">Digite sua analise...</string>
+    <string name="save">Salvar</string>
+    <string name="delete">Excluir</string>
 </resources>
